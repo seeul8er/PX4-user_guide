@@ -14,7 +14,9 @@
 
 - [AirMind MindPX](../flight_controller/mindpx.md)
 - [AirMind MindRacer](../flight_controller/mindracer.md)
-- [ARK Electronics ARKV6X](../flight_controller/arkv6x.md) (and [ARK Electronics Pixhawk Autopilot Bus Carrier](../flight_controller/arkpab.md))
+- [ARK Electronics ARKV6X](../flight_controller/ark_v6x.md) (and [ARK Electronics Pixhawk Autopilot Bus Carrier](../flight_controller/ark_pab.md))
+- [ARK FPV Flight Controller](../flight_controller/ark_fpv.md)
+- [ARK Pi6X Flow Flight Controller](../flight_controller/ark_pi6x.md)
 - [CUAV X7](../flight_controller/cuav_x7.md)
 - [CUAV Nora](../flight_controller/cuav_nora.md)（CUAV X7 variant)
 - [CUAV V5+](../flight_controller/cuav_v5_plus.md) (FMUv5)
@@ -34,7 +36,6 @@
 - [ModalAI VOXL 2](../flight_controller/modalai_voxl_2.md)
 - [mRobotics-X2.1](../flight_controller/mro_x2.1.md) (FMUv2)
 - [mRo Control Zero](../flight_controller/mro_control_zero_f7.md)
-- [NXP FMUK66](../flight_controller/nxp_rddrone_fmuk66.md) (www.nxp.com)
 - [Sky-Drones AIRLink](../flight_controller/airlink.md)
 - [SPRacing SPRacingH7EXTREME](../flight_controller/spracingh7extreme.md)
 - [ThePeach FCC-K1](../flight_controller/thepeach_k1.md)

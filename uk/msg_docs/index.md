@@ -29,7 +29,6 @@ This topic lists the UORB messages available in PX4 (some of which may be may be
 - [CanInterfaceStatus](CanInterfaceStatus.md)
 - [CellularStatus](CellularStatus.md)
 - [CollisionConstraints](CollisionConstraints.md) — локальні обмеження заданих значень у кадрі NED, встановлення значення NaN означає відсутність обмежень
-- [CollisionReport](CollisionReport.md)
 - [ConfigOverrides](ConfigOverrides.md) - Конфігуровані перевизначення (зовнішніми) режимами або виконавцями режимів
 - [ControlAllocatorStatus](ControlAllocatorStatus.md)
 - [Cpuload](Cpuload.md)
@@ -39,9 +38,9 @@ This topic lists the UORB messages available in PX4 (some of which may be may be
 - [DebugKeyValue](DebugKeyValue.md)
 - [DebugValue](DebugValue.md)
 - [DebugVect](DebugVect.md)
-- [DifferentialDriveSetpoint](DifferentialDriveSetpoint.md)
 - [DifferentialPressure](DifferentialPressure.md)
 - [DistanceSensor](DistanceSensor.md) - дані повідомлення DISTANCE_SENSOR
+- [DistanceSensorModeChangeRequest](DistanceSensorModeChangeRequest.md)
 - [Ekf2Timestamps](Ekf2Timestamps.md) - це повідомлення містить (відносні) часові мітки входів датчиків, що використовуються EKF2. Його можна використовувати для відтворення.
 - [EscReport](EscReport.md)
 - [EscStatus](EscStatus.md)
@@ -115,11 +114,16 @@ This topic lists the UORB messages available in PX4 (some of which may be may be
 - [ModeCompleted](ModeCompleted.md) — Результат завершення режиму, опублікований активним режимом. Можливі значення nav_state визначені в повідомленні VehicleStatus. Зверніть увагу, що це не завжди публікується (наприклад, коли користувач переходить у режими або при активації failsafe)
 - [MountOrientation](MountOrientation.md)
 - [NavigatorMissionItem](NavigatorMissionItem.md)
+- [NavigatorStatus](NavigatorStatus.md) — Current status of a Navigator mode The possible values of nav_state are defined in the VehicleStatus msg.
 - [NormalizedUnsignedSetpoint](NormalizedUnsignedSetpoint.md)
 - [NpfgStatus](NpfgStatus.md)
 - [ IrlockReport ](ObstacleDistance.md) — Відстані до перешкод перед сенсором.
 - [ OffboardControlMode ](OffboardControlMode.md) — Режим керування поза платформою
 - [ OnboardComputerStatus ](OnboardComputerStatus.md) — дані повідомлення про ONBOARD_COMPUTER_STATUS
+- [OpenDroneIdArmStatus](OpenDroneIdArmStatus.md)
+- [OpenDroneIdOperatorId](OpenDroneIdOperatorId.md)
+- [OpenDroneIdSelfId](OpenDroneIdSelfId.md)
+- [OpenDroneIdSystem](OpenDroneIdSystem.md)
 - [OrbTest](OrbTest.md)
 - [OrbTestLarge](OrbTestLarge.md)
 - [OrbTestMedium](OrbTestMedium.md)
@@ -148,7 +152,14 @@ This topic lists the UORB messages available in PX4 (some of which may be may be
 - [RegisterExtComponentReply](RegisterExtComponentReply.md)
 - [RegisterExtComponentRequest](RegisterExtComponentRequest.md) — Request to register an external component
 - [RoverAckermannGuidanceStatus](RoverAckermannGuidanceStatus.md)
+- [RoverAckermannSetpoint](RoverAckermannSetpoint.md)
 - [RoverAckermannStatus](RoverAckermannStatus.md)
+- [RoverDifferentialGuidanceStatus](RoverDifferentialGuidanceStatus.md)
+- [RoverDifferentialSetpoint](RoverDifferentialSetpoint.md)
+- [RoverDifferentialStatus](RoverDifferentialStatus.md)
+- [RoverMecanumGuidanceStatus](RoverMecanumGuidanceStatus.md)
+- [RoverMecanumSetpoint](RoverMecanumSetpoint.md)
+- [RoverMecanumStatus](RoverMecanumStatus.md)
 - [Rpm](Rpm.md)
 - [RtlStatus](RtlStatus.md)
 - [RtlTimeEstimate](RtlTimeEstimate.md)

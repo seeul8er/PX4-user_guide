@@ -22,7 +22,8 @@ It also highlights devices that connect via the CAN bus, and those which support
 
 Device | GPS | Compass | [DroneCAN](../dronecan/index.md) | [GPS Yaw](#configuring-gps-as-yaw-heading-source) | PPK
 :--- | :---: | :---:  | :---:  | :---:  | :---:
-[ARK RTK GPS](https://arkelectron.com/product/ark-rtk-gps/) | F9P  | ICM42688p | &check; | [Dual F9P][DualF9P] |
+[ARK RTK GPS](../dronecan/ark_rtk_gps.md) | F9P  | BMM150 | &check; | [Dual F9P][DualF9P] |
+[ARK MOSAIC-X5 RTK GPS](../dronecan/ark_mosaic__rtk_gps.md) | Mosaic-X5  | IIS2MDC | &check; | [Septentrio Dual Antenna][SeptDualAnt] |
 [CUAV C-RTK GPS](../gps_compass/rtk_gps_cuav_c-rtk.md) | M8P/M8N | &check; | | |
 [CUAV C-RTK2](../gps_compass/rtk_gps_cuav_c-rtk2.md) | F9P |  &check; | | [Dual F9P][DualF9P] |
 [CUAV C-RTK 9Ps GPS](../gps_compass/rtk_gps_cuav_c-rtk-9ps.md) | F9P | RM3100 | | [Dual F9P][DualF9P] |
@@ -30,6 +31,7 @@ Device | GPS | Compass | [DroneCAN](../dronecan/index.md) | [GPS Yaw](#configuri
 [CubePilot Here+ RTK GPS](../gps_compass/rtk_gps_hex_hereplus.md) | M8P | HMC5983 | | |
 [CubePilot Here3 CAN GNSS GPS (M8N)](https://www.cubepilot.org/#/here/here3) | M8P | ICM20948 | &check; | |
 [Drotek SIRIUS RTK GNSS ROVER (F9P)](https://store-drotek.com/911-sirius-rtk-gnss-rover-f9p.html) | F9P | RM3100 | | [Dual F9P][DualF9P] |
+[DATAGNSS GEM1305 RTK Receiver][DATAGNSS GEM1305 RTK] | TAU951M | &cross; | | &cross; |
 [Femtones MINI2 Receiver](../gps_compass/rtk_gps_fem_mini2.md) | FB672, FB6A0 | &check; | | |
 [Freefly RTK GPS](../gps_compass/rtk_gps_freefly.md) | F9P | IST8310 | | |
 [Holybro H-RTK ZED-F9P RTK Rover (DroneCAN variant)](../dronecan/holybro_h_rtk_zed_f9p_gps.md) | F9P | RM3100 | &check; | [Dual F9P][DualF9P] |
@@ -59,6 +61,7 @@ Device | GPS | Compass | [DroneCAN](../dronecan/index.md) | [GPS Yaw](#configuri
 [DualF9P]: ../gps_compass/u-blox_f9p_heading.md
 [SeptDualAnt]: ../gps_compass/septentrio.md#gnss-based-heading
 [UnicoreDualAnt]: ../gps_compass/rtk_gps_holybro_unicore_um982.md#enable-gps-heading-yaw
+[DATAGNSS GEM1305 RTK]: ../gps_compass/rtk_gps_gem1305.md
 
 Notes:
 

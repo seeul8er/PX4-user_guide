@@ -12894,6 +12894,16 @@ Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
 &check; |  |  |  | -1 |  
 
+### BAT1_I_OVERWRITE (`FLOAT`) {#BAT1_I_OVERWRITE}
+
+Battery 1 idle current overwrite.
+
+This parameter allows to overwrite the current measured during idle (unarmed) state with a user-defined constant value (expressed in amperes). When the system is armed, the measured current is used. This is useful because on certain ESCs current measurements are inaccurate in case of no load. Negative values are ignored and will cause the measured current to be used. The default value of 0 disables the overwrite, in which case the measured value is always used.
+
+Reboot | minValue | maxValue | increment | default | unit
+--- | --- | --- | --- | --- | ---
+&check; |  |  |  | 0 |  
+
 ### BAT1_N_CELLS (`INT32`) {#BAT1_N_CELLS}
 
 Number of cells for battery 1.
@@ -13022,6 +13032,16 @@ This parameter specifies the ADC channel used to monitor current of main power b
 Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
 &check; |  |  |  | -1 |  
+
+### BAT2_I_OVERWRITE (`FLOAT`) {#BAT2_I_OVERWRITE}
+
+Battery 2 idle current overwrite.
+
+This parameter allows to overwrite the current measured during idle (unarmed) state with a user-defined constant value (expressed in amperes). When the system is armed, the measured current is used. This is useful because on certain ESCs current measurements are inaccurate in case of no load. Negative values are ignored and will cause the measured current to be used. The default value of 0 disables the overwrite, in which case the measured value is always used.
+
+Reboot | minValue | maxValue | increment | default | unit
+--- | --- | --- | --- | --- | ---
+&check; |  |  |  | 0 |  
 
 ### BAT2_N_CELLS (`INT32`) {#BAT2_N_CELLS}
 
@@ -14386,11 +14406,31 @@ Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
 &nbsp; | -1 | 400 |  | 5. | m 
 
+### COM_POS_LOW_ACT (`INT32`) {#COM_POS_LOW_ACT}
+
+Low position accuracy action.
+
+Action the system takes when the estimated position has an accuracy below the specified threshold. See COM_POS_LOW_EPH to set the failsafe threshold. The failsafe action is only executed if the vehicle is in auto mission or auto loiter mode, otherwise it is only a warning.
+
+**Values:**
+
+- `0`: None
+- `1`: Warning
+- `2`: Hold
+- `3`: Return
+- `4`: Terminate
+- `5`: Land
+
+
+Reboot | minValue | maxValue | increment | default | unit
+--- | --- | --- | --- | --- | ---
+&nbsp; |  |  | 1 | 3 |  
+
 ### COM_POS_LOW_EPH (`FLOAT`) {#COM_POS_LOW_EPH}
 
-EPH threshold for RTL.
+Low position accuracy failsafe threshold.
 
-Specify the threshold for triggering a warning for low local position accuracy. Additionally triggers a RTL if currently in Mission or Loiter mode. Local position has to be still declared valid, which is most of all depending on COM_POS_FS_EPH. Use this feature on systems with dead-reckoning capabilites (e.g. fixed-wing vehicles with airspeed sensor) to improve the user notification and failure mitigation when flying in GNSS-denied areas. Set to -1 to disable.
+This triggers the action specified in COM_POS_LOW_ACT if the estimated position accuracy is below this threshold. Local position has to be still declared valid, which requires some kind of velocity aiding or large dead-reckoning time (EKF2_NOAID_TOUT), and a high failsafe threshold (COM_POS_FS_EPH). Set to -1 to disable.
 
 Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
@@ -15533,6 +15573,14 @@ Measurement noise for GNSS velocity.
 Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
 &nbsp; | 0.01 | 5.0 |  | 0.3 | m/s 
+
+### EKF2_GPS_YAW_OFF (`FLOAT`) {#EKF2_GPS_YAW_OFF}
+
+Heading/Yaw offset for dual antenna GPS.
+
+Reboot | minValue | maxValue | increment | default | unit
+--- | --- | --- | --- | --- | ---
+&nbsp; | 0.0 | 360.0 |  | 0.0 | deg 
 
 ### EKF2_GRAV_NOISE (`FLOAT`) {#EKF2_GRAV_NOISE}
 
@@ -22173,13 +22221,13 @@ Reboot | minValue | maxValue | increment | default | unit
 
 ### MIS_DIST_1WP (`FLOAT`) {#MIS_DIST_1WP}
 
-Maximal horizontal distance from current position to first waypoint.
+Maximal horizontal distance from Home to first waypoint.
 
-Failsafe check to prevent running mission stored from previous flight at a new takeoff location. Set a value of zero or less to disable. The mission will not be started if the current waypoint is more distant than MIS_DIST_1WP from the current position.
+There will be a warning message if the current waypoint is more distant than MIS_DIST_1WP from Home. Has no effect on mission validity. Set a value of zero or less to disable.
 
 Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
-&nbsp; | -1 | 10000 | 100 | 10000 | m 
+&nbsp; | -1 | 100000 | 100 | 10000 | m 
 
 ### MIS_LND_ABRT_ALT (`INT32`) {#MIS_LND_ABRT_ALT}
 
@@ -22914,7 +22962,7 @@ Reboot | minValue | maxValue | increment | default | unit
 
 Maximum horizontal acceleration.
 
-MPC_POS_MODE 1 just deceleration 3 acceleration and deceleration 4 not used, use MPC_ACC_HOR instead
+MPC_POS_MODE 1 just deceleration 4 not used, use MPC_ACC_HOR instead
 
 Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
@@ -22989,7 +23037,7 @@ Reboot | minValue | maxValue | increment | default | unit
 
 Maximum horizontal and vertical jerk in Position/Altitude mode.
 
-Limit the maximum jerk of the vehicle (how fast the acceleration can change). A lower value leads to smoother motions but limits agility (how fast it can change directions or break). Setting this to the maximum value essentially disables the limit. Only used with smooth MPC_POS_MODE Smoothed velocity and Acceleration based.
+Limit the maximum jerk of the vehicle (how fast the acceleration can change). A lower value leads to smoother motions but limits agility (how fast it can change directions or break). Setting this to the maximum value essentially disables the limit. Only used with MPC_POS_MODE Acceleration based.
 
 Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
@@ -23109,12 +23157,11 @@ Reboot | minValue | maxValue | increment | default | unit
 
 Position/Altitude mode variant.
 
-The supported sub-modes are: - "Direct velocity": Sticks directly map to velocity setpoints without smoothing. Also applies to vertical direction and Altitude mode. Useful for velocity control tuning. - "Smoothed velocity": Sticks map to velocity but with maximum acceleration and jerk limits based on jerk optimized trajectory generator (different algorithm than 1). - "Acceleration based": Sticks map to acceleration and there's a virtual brake drag
+The supported sub-modes are: - "Direct velocity": Sticks directly map to velocity setpoints without smoothing. Also applies to vertical direction and Altitude mode. Useful for velocity control tuning. - "Acceleration based": Sticks map to acceleration and there's a virtual brake drag
 
 **Values:**
 
 - `0`: Direct velocity
-- `3`: Smoothed velocity
 - `4`: Acceleration based
 
 
@@ -26101,6 +26148,37 @@ Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
 &nbsp; | 0 | 18 |  | 0 |  
 
+### RC_MAP_PAY_SW (`INT32`) {#RC_MAP_PAY_SW}
+
+Payload Power Switch RC channel.
+
+**Values:**
+
+- `0`: Unassigned
+- `1`: Channel 1
+- `2`: Channel 2
+- `3`: Channel 3
+- `4`: Channel 4
+- `5`: Channel 5
+- `6`: Channel 6
+- `7`: Channel 7
+- `8`: Channel 8
+- `9`: Channel 9
+- `10`: Channel 10
+- `11`: Channel 11
+- `12`: Channel 12
+- `13`: Channel 13
+- `14`: Channel 14
+- `15`: Channel 15
+- `16`: Channel 16
+- `17`: Channel 17
+- `18`: Channel 18
+
+
+Reboot | minValue | maxValue | increment | default | unit
+--- | --- | --- | --- | --- | ---
+&nbsp; | 0 | 18 |  | 0 |  
+
 ### RC_MAP_RETURN_SW (`INT32`) {#RC_MAP_RETURN_SW}
 
 Return switch channel.
@@ -26166,6 +26244,16 @@ Reboot | minValue | maxValue | increment | default | unit
 ### RC_OFFB_TH (`FLOAT`) {#RC_OFFB_TH}
 
 Threshold for selecting offboard mode.
+
+0-1 indicate where in the full channel range the threshold sits 0 : min 1 : max sign indicates polarity of comparison positive : true when channel>th negative : true when channel<th
+
+Reboot | minValue | maxValue | increment | default | unit
+--- | --- | --- | --- | --- | ---
+&nbsp; | -1 | 1 |  | 0.75 |  
+
+### RC_PAYLOAD_TH (`FLOAT`) {#RC_PAYLOAD_TH}
+
+Threshold for selecting payload power switch.
 
 0-1 indicate where in the full channel range the threshold sits 0 : min 1 : max sign indicates polarity of comparison positive : true when channel>th negative : true when channel<th
 
@@ -26416,11 +26504,37 @@ Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
 &nbsp; | -1 | 100 | 0.01 | 3 | m 
 
+### RA_LAT_ACCEL_I (`FLOAT`) {#RA_LAT_ACCEL_I}
+
+Integral gain for lateral acceleration controller.
+
+Reboot | minValue | maxValue | increment | default | unit
+--- | --- | --- | --- | --- | ---
+&nbsp; | 0 | 100 | 0.001 | 0 |  
+
+### RA_LAT_ACCEL_P (`FLOAT`) {#RA_LAT_ACCEL_P}
+
+Proportional gain for lateral acceleration controller.
+
+Reboot | minValue | maxValue | increment | default | unit
+--- | --- | --- | --- | --- | ---
+&nbsp; | 0 | 100 | 0.01 | 0 |  
+
 ### RA_MAX_ACCEL (`FLOAT`) {#RA_MAX_ACCEL}
 
 Maximum acceleration for the rover.
 
-This is used for the acceleration slew rate, the feed-forward term for the speed controller during missions and the corner slow down effect. Note: For the corner slow down effect RA_MAX_JERK, RA_MISS_VEL_GAIN and RA_MISS_VEL_MIN also have to be set.
+This is used for the acceleration slew rate.
+
+Reboot | minValue | maxValue | increment | default | unit
+--- | --- | --- | --- | --- | ---
+&nbsp; | -1 | 100 | 0.01 | -1 | m/s^2 
+
+### RA_MAX_DECEL (`FLOAT`) {#RA_MAX_DECEL}
+
+Maximum deceleration for the rover.
+
+This is used for the deceleration slew rate, the feed-forward term for the speed controller during missions and the corner slow down effect. Note: For the corner slow down effect RA_MAX_JERK also has to be set.
 
 Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
@@ -26430,17 +26544,27 @@ Reboot | minValue | maxValue | increment | default | unit
 
 Maximum jerk.
 
-Limit for forwards acc/deceleration change. This is used for the corner slow down effect. Note: RA_MAX_ACCEL, RA_MISS_VEL_GAIN and RA_MISS_VEL_MIN also have to be set for this to be enabled.
+Limit for forwards acc/deceleration change. This is used for the corner slow down effect. Note: RA_MAX_DECEL also has to be set for this to be enabled.
 
 Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
 &nbsp; | -1 | 100 | 0.01 | -1 | m/s^3 
 
+### RA_MAX_LAT_ACCEL (`FLOAT`) {#RA_MAX_LAT_ACCEL}
+
+Maximum allowed lateral acceleration.
+
+This parameter is used to cap the lateral acceleration and map controller inputs to desired lateral acceleration in Acro, Stabilized and Position mode.
+
+Reboot | minValue | maxValue | increment | default | unit
+--- | --- | --- | --- | --- | ---
+&nbsp; | 0.01 | 1000 | 0.01 | 0.01 | m/s^2 
+
 ### RA_MAX_SPEED (`FLOAT`) {#RA_MAX_SPEED}
 
-Speed the rover drives at maximum throttle.
+Maximum allowed speed.
 
-This is used for the feed-forward term of the speed controller. A value of -1 disables the feed-forward term in which case the Integrator (RA_SPEED_I) becomes necessary to track speed setpoints.
+This is the maximum allowed speed setpoint when driving in a mode that uses closed loop speed control.
 
 Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
@@ -26464,33 +26588,15 @@ Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
 &nbsp; | -1 | 1000 | 0.01 | -1 | deg/s 
 
-### RA_MISS_VEL_DEF (`FLOAT`) {#RA_MISS_VEL_DEF}
+### RA_MAX_THR_SPEED (`FLOAT`) {#RA_MAX_THR_SPEED}
 
-Default rover velocity during a mission.
+Speed the rover drives at maximum throttle.
 
-Reboot | minValue | maxValue | increment | default | unit
---- | --- | --- | --- | --- | ---
-&nbsp; | 0 | 100 | 0.01 | 2 | m/s 
-
-### RA_MISS_VEL_GAIN (`FLOAT`) {#RA_MISS_VEL_GAIN}
-
-Tuning parameter for the velocity reduction during cornering.
-
-The cornering speed is equal to the inverse of the acceptance radius of the WP multiplied with this factor. Lower value -> More velocity reduction during cornering.
+This parameter is used to calculate the feedforward term of the closed loop speed control which linearly maps desired speeds to normalized motor commands [-1. 1]. A good starting point is the observed ground speed when the rover drives at maximum throttle in manual mode. Increase this parameter if the rover is faster than the setpoint, and decrease if the rover is slower.
 
 Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
-&nbsp; | 0.05 | 100 | 0.01 | 5 |  
-
-### RA_MISS_VEL_MIN (`FLOAT`) {#RA_MISS_VEL_MIN}
-
-Minimum rover velocity during a mission.
-
-The velocity off the rover is reduced based on the corner it has to take to smooth the trajectory (Set to -1 to disable)
-
-Reboot | minValue | maxValue | increment | default | unit
---- | --- | --- | --- | --- | ---
-&nbsp; | -1 | 100 | 0.01 | 1 | m/s 
+&nbsp; | -1 | 100 | 0.01 | -1 | m/s 
 
 ### RA_SPEED_I (`FLOAT`) {#RA_SPEED_I}
 
@@ -26498,7 +26604,7 @@ Integral gain for ground speed controller.
 
 Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
-&nbsp; | 0 | 100 | 0.01 | 1 |  
+&nbsp; | 0 | 100 | 0.001 | 1 |  
 
 ### RA_SPEED_P (`FLOAT`) {#RA_SPEED_P}
 
@@ -26520,16 +26626,6 @@ Reboot | minValue | maxValue | increment | default | unit
 
 ## Rover Differential
 
-### RD_MAN_YAW_SCALE (`FLOAT`) {#RD_MAN_YAW_SCALE}
-
-Manual yaw rate scale.
-
-In manual mode the setpoint for the yaw rate received from the yaw stick is scaled by this value.
-
-Reboot | minValue | maxValue | increment | default | unit
---- | --- | --- | --- | --- | ---
-&nbsp; | 0.001 | 1 | 0.01 | 1 |  
-
 ### RD_MAX_ACCEL (`FLOAT`) {#RD_MAX_ACCEL}
 
 Maximum acceleration.
@@ -26539,6 +26635,16 @@ Maximum acceleration is used to limit the acceleration of the rover
 Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
 &nbsp; | 0 | 100 | 0.01 | 0.5 | m/s^2 
+
+### RD_MAX_DECEL (`FLOAT`) {#RD_MAX_DECEL}
+
+Maximum deceleration.
+
+Maximum decelaration is used to limit the deceleration of the rover. Set to -1 to disable, causing the rover to decelerate as fast as possible. Caution: This disables the slow down effect in auto modes.
+
+Reboot | minValue | maxValue | increment | default | unit
+--- | --- | --- | --- | --- | ---
+&nbsp; | -1 | 100 | 0.01 | -1 | m/s^2 
 
 ### RD_MAX_JERK (`FLOAT`) {#RD_MAX_JERK}
 
@@ -26579,6 +26685,16 @@ This parameter is used to calculate the feedforward term of the closed loop yaw 
 Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
 &nbsp; | 0 | 100 | 0.01 | 2 | m/s 
+
+### RD_MAX_YAW_ACCEL (`FLOAT`) {#RD_MAX_YAW_ACCEL}
+
+Maximum allowed yaw acceleration for the rover.
+
+This parameter is used to cap desired yaw acceleration. This is used to adjust incoming yaw rate setpoints to a feasible yaw rate setpoint based on the physical limitation on how fast the yaw rate can change. This leads to a smooth setpoint trajectory for the closed loop yaw rate controller to track. Set to -1 to disable.
+
+Reboot | minValue | maxValue | increment | default | unit
+--- | --- | --- | --- | --- | ---
+&nbsp; | -1 | 1000 | 0.01 | -1 | deg/s^2 
 
 ### RD_MAX_YAW_RATE (`FLOAT`) {#RD_MAX_YAW_RATE}
 
@@ -27096,7 +27212,6 @@ Selects the algorithm used for logfile encryption
 
 - `0`: Disabled
 - `2`: XChaCha20
-- `3`: AES
 
 
 Reboot | minValue | maxValue | increment | default | unit
@@ -29955,8 +30070,8 @@ Distance Sensor Rotation as MAV_SENSOR_ORIENTATION enum
 
 - `0`: ROTATION_FORWARD_FACING
 - `2`: ROTATION_RIGHT_FACING
+- `4`: ROTATION_BACKWARD_FACING
 - `6`: ROTATION_LEFT_FACING
-- `12`: ROTATION_BACKWARD_FACING
 - `24`: ROTATION_UPWARD_FACING
 - `25`: ROTATION_DOWNWARD_FACING
 
@@ -30458,6 +30573,14 @@ This parameter defines the yaw rotation of the optical flow relative to the vehi
 Reboot | minValue | maxValue | increment | default | unit
 --- | --- | --- | --- | --- | ---
 &nbsp; |  |  |  | 0 |  
+
+### SENS_FLOW_SCALE (`FLOAT`) {#SENS_FLOW_SCALE}
+
+Optical flow scale factor.
+
+Reboot | minValue | maxValue | increment | default | unit
+--- | --- | --- | --- | --- | ---
+&nbsp; | 0.5 | 1.5 |  | 1. |  
 
 ### SENS_FTX_CFG (`INT32`) {#SENS_FTX_CFG}
 

@@ -27,7 +27,7 @@ The manual modes listed below provide increasing levels of autopilot support:
 
 ### Manual Mode
 
-In this mode the stick inputs are directly mapped to motor commands. The rover does not attempt to maintain a specific orientation or compensate for external factors like slopes or uneven terrain!  
+In this mode the stick inputs are directly mapped to motor commands. The rover does not attempt to maintain a specific orientation or compensate for external factors like slopes or uneven terrain!
 The user is responsible for making the necessary adjustments to the stick inputs to keep the rover on the desired course.
 
 | Stick                  | Effect                              |
@@ -62,7 +62,7 @@ For the configuration/tuning of this mode see [Acro mode](../config_rover/differ
 This mode requires a yaw rate and yaw estimate.
 :::
 
-In this mode the vehicle regulates its yaw rate to a setpoint and will maintain its heading if this setpoint is zero (but does not regulate speed).  
+In this mode the vehicle regulates its yaw rate to a setpoint and will maintain its heading if this setpoint is zero (but does not regulate speed).
 Compared to [Acro mode](#acro-mode), this mode is much better at driving in a straight line as it can more effectively reject disturbances.
 
 | Stick                  | Effect                                                         |
@@ -80,7 +80,9 @@ For the configuration/tuning of this mode see [Stabilized mode](../config_rover/
 This mode requires a yaw rate, yaw, speed and global position estimate.
 :::
 
-This is the mode with the most autopilot support. The vehicle regulates its yaw rate and speed to a setpoint. If the yaw rate setpoint is zero, the controller will remember the gps coordinates and yaw (heading) of the vehicle and use those to construct a line that the rover will then follow (course control).
+This is the manual mode with the most autopilot support.
+The vehicle regulates its yaw rate and speed to a setpoint.
+If the yaw rate setpoint is zero, the controller will remember the GNSS coordinates and yaw (heading) of the vehicle and use those to construct a line that the rover will then follow (course control).
 This offers the highest amount of disturbance rejection, which leads to the best straight line driving behavior.
 
 | Stick                  | Effect                                                         |
@@ -94,7 +96,7 @@ For the configuration/tuning of this mode see [Position mode](../config_rover/di
 
 ## Auto Modes
 
-In auto modes the autopilot takes over control of the vehicle to run missions, return to launch, or perform other autonomous navigation tasks.  
+In auto modes the autopilot takes over control of the vehicle to run missions, return to launch, or perform other autonomous navigation tasks.
 For the configuration/tuning of these modes see [Auto Modes](../config_rover/differential.md#auto-modes).
 
 ### Mission Mode

@@ -9,37 +9,37 @@ These are useful for applications including terrain following, precision hoverin
 
 The following models are supported by PX4, and can be connected to either the I2C or Serial bus (the tables below indicates what bus can be used for each model).
 
-### Available
-
 | Model                                                      | Range (m) | Bus               | Description                                                     |
 | ---------------------------------------------------------- | --------- | ----------------- | --------------------------------------------------------------- |
-| [SF11/C](https://lightwarelidar.com/products/sf11-c-100-m) | 100       | Serial or I2C bus |
+| [SF11/C](https://lightwarelidar.com/products/sf11-c-100-m) | 100       | Serial or I2C bus |                                                                 |
 | [LW20/C](https://lightware.co.za/products/lw20-c-100-m)    | 100       | I2C bus           | Waterproofed (IP67) with servo for sense-and-avoid applications |
 
-### Discontinued
+::: details Discontinued
 
-The following models are no longer available from the manufacturer.
+The following models are supported by PX4 but are no longer available from the manufacturer.
 
-| Model                                                                                              | Range | Bus           |
-| -------------------------------------------------------------------------------------------------- | ----- | ------------- |
-| [SF02](http://documents.lightware.co.za/SF02%20-%20Laser%20Rangefinder%20Manual%20-%20Rev%208.pdf) | 50    | Serial        |
-| [SF10/A](http://documents.lightware.co.za/SF10%20-%20Laser%20Altimeter%20Manual%20-%20Rev%206.pdf) | 25    | Serial or I2C |
-| [SF10/B](http://documents.lightware.co.za/SF10%20-%20Laser%20Altimeter%20Manual%20-%20Rev%206.pdf) | 50    | Serial or I2C |
-| SF10/C                                                                                             | 100m  | Serial or I2C |
+| Model                                                                                              | Range | Bus           |                                                                 |
+| -------------------------------------------------------------------------------------------------- | ----- | ------------- | --------------------------------------------------------------- |
+| [SF02](http://documents.lightware.co.za/SF02%20-%20Laser%20Rangefinder%20Manual%20-%20Rev%208.pdf) | 50    | Serial        |                                                                 |
+| [SF10/A](http://documents.lightware.co.za/SF10%20-%20Laser%20Altimeter%20Manual%20-%20Rev%206.pdf) | 25    | Serial or I2C |                                                                 |
+| [SF10/B](http://documents.lightware.co.za/SF10%20-%20Laser%20Altimeter%20Manual%20-%20Rev%206.pdf) | 50    | Serial or I2C |                                                                 |
+| SF10/C                                                                                             | 100m  | Serial or I2C |                                                                 |
 | LW20/B                                                                                             | 50    | I2C bus       | Waterproofed (IP67) with servo for sense-and-avoid applications |
+
+:::
 
 ## I2C Setup
 
 Check the tables above to confirm that which models can be connected to the I2C port.
 
-### Lidar Configuration
+### Lidar Configuration (SF11/C)
 
-This hardware does not ship with Pixhawk I2C compatibility enabled by default.
+The SF11/C hardware (only) does not ship with Pixhawk I2C compatibility enabled by default.
 To enable support, you have to download [LightWare Studio](https://lightwarelidar.com/pages/lightware-studio) and got to **Parameters > Communication** and tick mark **I2C compatibility mode (Pixhawk)**
 
 ![LightWare SF11/C Lidar-I2C Config](../../assets/hardware/sensors/lidar_lightware/lightware_studio_i2c_config.jpg)
 
-<a id="i2c_hardware_setup"></a>
+This step is not required for the other supported Lightware rangefinders.
 
 ### Hardware
 
@@ -54,9 +54,7 @@ On Linux systems you may be able to determine the address using [i2cdetect](http
 If the I2C address is equal to `0x66` the sensor can be used with PX4.
 :::
 
-<a id="i2c_parameter_setup"></a>
-
-### Parameter Setup
+### Parameter Setup {#i2c_parameter_setup}
 
 Set the [SENS_EN_SF1XX](../advanced_config/parameter_reference.md#SENS_EN_SF1XX) parameter to match the rangefinder model and then reboot.
 

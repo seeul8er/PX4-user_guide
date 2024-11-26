@@ -10,12 +10,15 @@
 
 PX4 supports the following rover types:
 
-- [**Differential steering**](../frames_rover/differential_rover.md): direction is controlled by moving the left- and right-side wheels at different speeds (also know as skid or tank steering). This kind of steering is commonly used on bulldozers, tanks, and other tracked vehicles.
-- [**Ackermann steering**](../frames_rover/ackermann_rover.md): direction is controlled by pointing wheels in the direction of travel. This kind of steering is used on most commercial vehicles, including cars, trucks etc.
+| Rover Type                                          | Steering                                                                                                                                                      |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**Ackermann**](../frames_rover/ackermann.md)       | Direction is controlled by pointing wheels in the direction of travel. This kind of steering is used on most commercial vehicles, including cars, trucks etc. |
+| [**Differential**](../frames_rover/differential.md) | Direction is controlled by moving the left- and right-side wheels at different speeds (also know as skid or tank steering).                                   |
+| [**Mecanum**](../frames_rover/mecanum.md)           | Direction is controlled by moving each mecanum wheel individually at different speeds and in different directions.                                            |
 
-The supported flight modes can be seen in [Flight modes](../flight_modes_rover/index.md#) and the supported frames in [Airframes Reference > Rover](../airframes/airframe_reference.md#rover).
+The supported frames can be seen in [Airframes Reference > Rover](../airframes/airframe_reference.md#rover).
 
-## Flashing the rover build
+## Flashing the Rover Build
 
 Rovers use a custom build that must be flashed onto your flight controller instead of the default PX4 build:
 
@@ -30,8 +33,9 @@ Rovers use a custom build that must be flashed onto your flight controller inste
    ::: info You can also enable the modules in default builds by adding the respective line to your [board configuration](../hardware/porting_guide_config.md) (e.g. for fmu-v6x you might add one of these lines to [`main/boards/px4/fmu-v6x/default.px4board`](https://github.com/PX4/PX4-Autopilot/blob/main/boards/px4/fmu-v6x/default.px4board)):
 
    ```sh
-   CONFIG_MODULES_ROVER_DIFFERENTIAL=y
    CONFIG_MODULES_ROVER_ACKERMANN=y
+   CONFIG_MODULES_ROVER_DIFFERENTIAL=y
+   CONFIG_MODULES_ROVER_MECANUM=y
    ```
 
    Note that adding the rover module may lead to flash overflow, in which case you will need to disable modules that you do not plan to use (such as those related to multicopter or fixed wing).
@@ -42,8 +46,7 @@ Rovers use a custom build that must be flashed onto your flight controller inste
 ## Simulation
 
 [Gazebo](../sim_gazebo_gz/index.md) provides simulations for both types of steering:
-
-- [Differential-steering rover](../sim_gazebo_gz/vehicles.md#differential-rover)
 - [Ackermann rover](../sim_gazebo_gz/vehicles.md#ackermann-rover)
+- [Differential rover](../sim_gazebo_gz/vehicles.md#differential-rover)
 
 ![Rover gazebo simulation](../../assets/airframes/rover/rover_simulation.png)
